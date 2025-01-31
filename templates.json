@@ -1,0 +1,27 @@
+[
+  {
+    "identifier": "theme_app_extension",
+    "name": "Theme app extension",
+    "defaultName": "theme-extension",
+    "group": "Online store",
+    "supportLinks": [],
+    "url": "https://github.com/Shopify/extensions-templates",
+    "type": "theme",
+    "extensionPoints": [],
+    "supportedFlavors": [
+      {
+        "name": "Liquid",
+        "value": "liquid",
+        "path": "theme-extension"
+      }
+    ]
+  },
+  {
+    "identifier": "whatsapp-button",
+    "name": "Whatsapp Button",
+    "defaultName": "whatsapp-button",
+    "group": "Whatsapp Button",
+    "type": "theme",
+    "path": "whatsapp-button"
+  }
+]
