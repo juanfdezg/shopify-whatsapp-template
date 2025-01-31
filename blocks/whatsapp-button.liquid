@@ -1,0 +1,131 @@
+{% assign whatsapp_number = shop.metafields.versu.agent_whatsapp_number | default: "56998765432" %}
+
+<div class="whatsapp-container">
+  {% if block.settings.show_tooltip and block.settings.tooltip_text != blank %}
+    <div class="whatsapp-tooltip">{{ block.settings.tooltip_text }}</div>
+  {% endif %}
+  <a href="https://wa.me/{{ whatsapp_number | remove: ' ' | remove: '+' }}?text=Hola!%20Tengo%20una%20consulta" class="whatsapp-button" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+</div>
+
+<style>
+  .whatsapp-container {
+    position: fixed;
+    bottom: 20px;
+    {% if block.settings.position == 'left' %}
+    left: 20px;
+    {% else %}
+    right: 20px;
+    {% endif %}
+    z-index: 9999;
+  }
+
+  .whatsapp-button {
+    display: block;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+  }
+
+  .whatsapp-button img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .whatsapp-tooltip {
+    display: none; /* Hide by default */
+    position: absolute;
+    bottom: 100%;
+    {% if block.settings.position == 'left' %}
+    left: 0;
+    {% else %}
+    right: 0;
+    {% endif %}
+    background: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-bottom: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .whatsapp-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    {% if block.settings.position == 'left' %}
+    left: 20px;
+    {% else %}
+    right: 20px;
+    {% endif %}
+    border: 8px solid transparent;
+    border-top-color: white;
+  }
+
+  /* Only show tooltip on desktop/laptop devices */
+  @media (min-width: 768px) {
+    .whatsapp-tooltip {
+      display: block;
+    }
+    
+    .whatsapp-container:hover .whatsapp-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "WhatsApp Button",
+  "target": "body",
+  "settings": [
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Button Position",
+      "options": [
+        {
+          "value": "right",
+          "label": "Bottom Right"
+        },
+        {
+          "value": "left",
+          "label": "Bottom Left"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Tooltip Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tooltip",
+      "label": "Show Tooltip Message",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tooltip_text",
+      "label": "Tooltip Message",
+      "default": "¿Necesitas ayuda? 😊"
+    }
+  ]
+}
+{% endschema %}
