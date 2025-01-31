@@ -21,7 +21,15 @@
     "name": "Whatsapp Button",
     "defaultName": "whatsapp-button",
     "group": "Whatsapp Button",
+    "url": "https://github.com/juanfdezg/shopify-whatsapp-template",
     "type": "theme",
-    "path": "whatsapp-button"
+    "extensionPoints": [],
+    "supportedFlavors": [
+      {
+        "name": "Liquid",
+        "value": "liquid",
+        "path": "whatsapp-button"
+      }
+    ]
   }
 ]
